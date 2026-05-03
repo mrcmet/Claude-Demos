@@ -1,0 +1,255 @@
+{
+  "department": "Mechanical Engineering",
+  "catalogYear": "2026",
+  "version": "1.0",
+  "courses": [
+    {
+      "id": "MATH101",
+      "name": "Calculus I",
+      "credits": 4,
+      "prerequisites": { "type": "none" },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Limits, derivatives, and integrals of single-variable functions. Fundamental theorem of calculus. Applications to physics and engineering."
+    },
+    {
+      "id": "PHYS101",
+      "name": "Physics I: Mechanics",
+      "credits": 4,
+      "prerequisites": { "type": "none" },
+      "corequisites": ["MATH101"],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Classical mechanics: kinematics, Newton's laws, work and energy, momentum, rotational motion, and oscillations. MATH101 must be taken concurrently."
+    },
+    {
+      "id": "ENGR101",
+      "name": "Introduction to Engineering",
+      "credits": 2,
+      "prerequisites": { "type": "none" },
+      "corequisites": [],
+      "termsOffered": ["Fall"],
+      "description": "Engineering disciplines, design process, problem-solving methods, technical communication, and ethics. Includes hands-on prototyping lab."
+    },
+    {
+      "id": "MATH201",
+      "name": "Calculus II",
+      "credits": 4,
+      "prerequisites": { "type": "all", "courses": ["MATH101"] },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Integration techniques, series, sequences, polar coordinates, and an introduction to multivariable calculus."
+    },
+    {
+      "id": "PHYS201",
+      "name": "Physics II: Electricity & Magnetism",
+      "credits": 4,
+      "prerequisites": { "type": "all", "courses": ["PHYS101", "MATH101"] },
+      "corequisites": ["MATH201"],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Electric fields and potentials, Gauss's law, capacitance, DC circuits, magnetic fields, Faraday's law, and Maxwell's equations. MATH201 must be taken concurrently."
+    },
+    {
+      "id": "CHEM101",
+      "name": "General Chemistry",
+      "credits": 3,
+      "prerequisites": { "type": "none" },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Atomic structure, chemical bonding, stoichiometry, thermodynamics, and electrochemistry relevant to materials science."
+    },
+    {
+      "id": "MATH301",
+      "name": "Differential Equations",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["MATH201"] },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Ordinary differential equations: first and second order, systems of ODEs, Laplace transforms, and series solutions. Applications to mechanical systems."
+    },
+    {
+      "id": "MATH302",
+      "name": "Linear Algebra",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["MATH201"] },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Vector spaces, matrix algebra, determinants, eigenvalues and eigenvectors, and linear transformations."
+    },
+    {
+      "id": "STAT300",
+      "name": "Engineering Statistics",
+      "credits": 3,
+      "prerequisites": {
+        "type": "any",
+        "courses": ["MATH201", "MATH301"]
+      },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring", "Summer"],
+      "description": "Probability theory, statistical distributions, hypothesis testing, regression analysis, and design of experiments for engineering applications. Accepts MATH201 or MATH301 as prerequisite."
+    },
+    {
+      "id": "ME201",
+      "name": "Statics",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["PHYS101", "MATH201"] },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Equilibrium of particles and rigid bodies, free body diagrams, distributed forces, friction, centroids, and moments of inertia."
+    },
+    {
+      "id": "ME202",
+      "name": "Dynamics",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["ME201", "MATH301"] },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Kinematics and kinetics of particles and rigid bodies, Newton-Euler equations, work-energy methods, impulse-momentum, and vibrations introduction."
+    },
+    {
+      "id": "ME210",
+      "name": "Mechanics of Materials",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["ME201"] },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Stress, strain, deformation of axially loaded members, torsion, bending, shear, combined loading, and failure theories."
+    },
+    {
+      "id": "ME220",
+      "name": "Materials Science",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["CHEM101", "PHYS101"] },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Crystal structure, phase diagrams, mechanical properties, failure modes, and selection criteria for metals, polymers, ceramics, and composites."
+    },
+    {
+      "id": "ME301",
+      "name": "Thermodynamics",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["PHYS101", "MATH201"] },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Laws of thermodynamics, thermodynamic properties of pure substances, work and heat interactions, power and refrigeration cycles."
+    },
+    {
+      "id": "ME302",
+      "name": "Fluid Mechanics",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["ME201", "MATH301"] },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Fluid properties, hydrostatics, conservation equations, dimensional analysis, internal and external flows, and introduction to turbulence."
+    },
+    {
+      "id": "ME310",
+      "name": "Heat Transfer",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["ME301", "ME302"] },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Conduction, convection, and radiation heat transfer. Steady-state and transient analysis. Heat exchangers and thermal systems design."
+    },
+    {
+      "id": "ME320",
+      "name": "Machine Design",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["ME202", "ME210", "ME220"] },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Fatigue, fracture mechanics, design of shafts, bearings, gears, fasteners, and welded joints. Failure mode and effects analysis."
+    },
+    {
+      "id": "ME401",
+      "name": "Vibrations",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["ME202", "MATH301"] },
+      "corequisites": [],
+      "termsOffered": ["Fall"],
+      "description": "Free and forced vibrations of single- and multi-degree-of-freedom systems, resonance, damping, modal analysis, and vibration isolation."
+    },
+    {
+      "id": "ME490",
+      "name": "Engineering Analysis",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["ME202", "MATH302", "STAT300"] },
+      "corequisites": [],
+      "termsOffered": ["Spring"],
+      "description": "Numerical methods for engineering analysis: root-finding, interpolation, numerical integration, ODEs, and finite element method introduction."
+    },
+    {
+      "id": "ME450",
+      "name": "Senior Capstone Design I",
+      "credits": 3,
+      "prerequisites": {
+        "type": "all",
+        "courses": ["ME310", "ME320", "ME490"]
+      },
+      "corequisites": ["ME451"],
+      "termsOffered": ["Fall"],
+      "description": "First semester of two-semester capstone design project. Problem definition, literature review, concept generation, prototyping, and preliminary design review. Must be taken with ME451 concurrently."
+    },
+    {
+      "id": "ME451",
+      "name": "Senior Capstone Design II",
+      "credits": 3,
+      "prerequisites": {
+        "type": "all",
+        "courses": ["ME310", "ME320", "ME490"]
+      },
+      "corequisites": ["ME450"],
+      "termsOffered": ["Spring"],
+      "description": "Second semester of capstone design. Detailed design, fabrication, testing, analysis, and final design presentation. Must be taken with ME450 concurrently."
+    },
+    {
+      "id": "ME461",
+      "name": "Technical Elective",
+      "credits": 3,
+      "prerequisites": {
+        "type": "choose",
+        "count": 1,
+        "courses": ["ME310", "ME401", "ME320"]
+      },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring", "Summer"],
+      "description": "Departmental technical elective. Choose from advanced topics in thermal-fluids, design, or dynamics. Requires completion of at least one of: ME310, ME401, or ME320."
+    }
+  ],
+  "programs": [
+    {
+      "id": "BSME",
+      "name": "B.S. Mechanical Engineering",
+      "requiredCourses": [
+        "MATH101",
+        "MATH201",
+        "MATH301",
+        "MATH302",
+        "PHYS101",
+        "PHYS201",
+        "CHEM101",
+        "ENGR101",
+        "STAT300",
+        "ME201",
+        "ME202",
+        "ME210",
+        "ME220",
+        "ME301",
+        "ME302",
+        "ME310",
+        "ME320",
+        "ME401",
+        "ME490",
+        "ME450",
+        "ME451"
+      ],
+      "electiveSets": [
+        {
+          "id": "TECH_ELECTIVE",
+          "label": "Technical Elective",
+          "chooseCount": 1,
+          "courses": ["ME461"]
+        }
+      ]
+    }
+  ]
+}

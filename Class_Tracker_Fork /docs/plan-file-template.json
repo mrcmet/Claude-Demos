@@ -1,0 +1,97 @@
+{
+  "department": "REPLACE — e.g. Computer Science",
+  "catalogYear": "REPLACE — e.g. 2026",
+  "version": "1.0",
+  "courses": [
+    {
+      "_comment": "ENTRY-LEVEL COURSE — no prerequisites",
+      "id": "PREFIX101",
+      "name": "Course Title Here",
+      "credits": 3,
+      "prerequisites": { "type": "none" },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"],
+      "description": "Optional catalog description."
+    },
+    {
+      "_comment": "REQUIRES ONE PREREQUISITE",
+      "id": "PREFIX201",
+      "name": "Course Title Here",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["PREFIX101"] },
+      "corequisites": [],
+      "termsOffered": ["Fall", "Spring"]
+    },
+    {
+      "_comment": "REQUIRES MULTIPLE PREREQUISITES (must complete ALL)",
+      "id": "PREFIX301",
+      "name": "Course Title Here",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["PREFIX201", "MATH201"] },
+      "corequisites": [],
+      "termsOffered": ["Fall"]
+    },
+    {
+      "_comment": "REQUIRES ONE OF SEVERAL PREREQUISITES (complete ANY one)",
+      "id": "PREFIX310",
+      "name": "Course Title Here",
+      "credits": 3,
+      "prerequisites": { "type": "any", "courses": ["PREFIX201", "PREFIX210"] },
+      "corequisites": [],
+      "termsOffered": ["Spring"]
+    },
+    {
+      "_comment": "REQUIRES N OF A LIST (complete N from a set)",
+      "id": "PREFIX401",
+      "name": "Course Title Here",
+      "credits": 3,
+      "prerequisites": { "type": "choose", "count": 2, "courses": ["PREFIX301", "PREFIX310", "PREFIX320"] },
+      "corequisites": [],
+      "termsOffered": ["Fall"]
+    },
+    {
+      "_comment": "WITH CO-REQUISITE (must take PREFIX402 at the same time or have taken it already)",
+      "id": "PREFIX450",
+      "name": "Course Title Here",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["PREFIX401"] },
+      "corequisites": ["PREFIX402"],
+      "termsOffered": ["Fall"],
+      "description": "PREFIX402 must be taken concurrently."
+    },
+    {
+      "_comment": "WITH MINIMUM GRADE REQUIREMENT",
+      "id": "PREFIX460",
+      "name": "Course Title Here",
+      "credits": 3,
+      "prerequisites": { "type": "all", "courses": ["PREFIX301"] },
+      "corequisites": [],
+      "minGrade": "C",
+      "termsOffered": ["Spring"],
+      "description": "Requires PREFIX301 with a grade of C or better."
+    }
+  ],
+  "programs": [
+    {
+      "id": "BSXX",
+      "name": "B.S. Program Name Here",
+      "requiredCourses": [
+        "PREFIX101",
+        "PREFIX201",
+        "PREFIX301",
+        "PREFIX310",
+        "PREFIX401",
+        "PREFIX450"
+      ],
+      "electiveSets": [
+        {
+          "_comment": "OPTIONAL — delete if no elective groups",
+          "id": "TECH_ELECTIVE",
+          "label": "Technical Elective",
+          "chooseCount": 1,
+          "courses": ["PREFIX460"]
+        }
+      ]
+    }
+  ]
+}

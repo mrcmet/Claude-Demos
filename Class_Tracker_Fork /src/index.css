@@ -1,0 +1,165 @@
+/* React Flow base styles — structural only, NO default visuals */
+@import '@xyflow/react/dist/base.css';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: #0a0e1a;
+  color: #e2e8f0;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── React Flow canvas overrides ─────────────────────────────────────────── */
+
+.react-flow {
+  background: #0a0e1a;
+}
+
+.react-flow__renderer {
+  background: #0a0e1a;
+}
+
+/* Controls panel */
+.react-flow__controls {
+  background: #111827;
+  border: 1px solid #1e2d45;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.react-flow__controls-button {
+  background: transparent;
+  border-bottom: 1px solid #1e2d45;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  color: #94a3b8;
+  fill: #94a3b8;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 120ms ease, color 120ms ease, fill 120ms ease;
+}
+
+.react-flow__controls-button:hover {
+  background: #1a2235;
+  color: #e2e8f0;
+  fill: #e2e8f0;
+}
+
+.react-flow__controls-button:last-child {
+  border-bottom: none;
+}
+
+.react-flow__controls-button svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* MiniMap */
+.react-flow__minimap {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #1e2d45;
+}
+
+/* Selection box */
+.react-flow__selection {
+  background: rgba(0, 212, 255, 0.05);
+  border: 1px solid rgba(0, 212, 255, 0.4);
+}
+
+/* Edge default reset */
+.react-flow__edge path {
+  stroke: #374151;
+}
+
+/* ─── Course Node ──────────────────────────────────────────────────────────── */
+
+.course-node {
+  /* CSS custom properties set inline from JS for hover effect */
+  --node-glow: rgba(0, 212, 255, 0.4);
+  --node-glow-soft: rgba(0, 212, 255, 0.2);
+}
+
+.course-node:hover {
+  transform: scale(1.04) !important;
+  box-shadow:
+    0 0 22px var(--node-glow),
+    0 0 44px var(--node-glow-soft) !important;
+  z-index: 10;
+}
+
+/* In-progress pulsing glow */
+.course-node.pulsing {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 14px rgba(0, 212, 255, 0.4),
+      0 0 28px rgba(0, 212, 255, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 22px rgba(0, 212, 255, 0.7),
+      0 0 44px rgba(0, 212, 255, 0.35);
+  }
+}
+
+/* ─── Edge animations ─────────────────────────────────────────────────────── */
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+/* ─── Scrollbar styling ───────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0e1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e2d45;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2d3f5e;
+}
+
+/* ─── Utility ─────────────────────────────────────────────────────────────── */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

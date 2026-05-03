@@ -1,0 +1,18 @@
+# Curriculum Tech Tree Planner — Course Catalog Template
+# HOW TO USE: Fill in course data below the header row. Delete or keep these comment lines — the importer skips any row where the first cell starts with #.
+# COLUMN GUIDE: id(required), name(required), credits(required), prereq_type(none/all/any/choose), prereq_courses(comma-separated IDs), prereq_count(integer, choose type only), corequisites(comma-separated IDs), min_grade(e.g. C), terms(Fall/Spring/Summer/Winter comma-separated), description(free text), program(degree program ID)
+id,name,credits,prereq_type,prereq_courses,prereq_count,corequisites,min_grade,terms,description,program
+CS101,Introduction to Programming,3,none,,,,,"Fall,Spring","Fundamentals of programming using Python. Variables, control flow, functions, lists, and basic object-oriented concepts. No prior experience required.",BSCS
+CS102,Discrete Mathematics,3,none,,,,,"Fall,Spring","Logic, sets, relations, functions, graph theory, combinatorics, and proof techniques essential for computer science.",BSCS
+CS150,Introduction to Web Development,3,none,,,,,"Fall,Spring,Summer","HTML, CSS, and introductory JavaScript. Building static and simple dynamic web pages. No prerequisites.",BSCS
+CS201,Data Structures,3,all,CS101,,,,Fall,"Arrays, linked lists, stacks, queues, trees, heaps, hash tables, and graphs. Algorithm complexity analysis. Object-oriented design in Java.",BSCS
+CS202,Computer Organization,3,all,CS101,,,,"Fall,Spring","Digital logic, binary arithmetic, assembly language, memory hierarchy, and CPU architecture fundamentals.",BSCS
+CS301,Algorithms,3,all,"CS201,CS102",,,,Spring,"Sorting, searching, dynamic programming, greedy algorithms, graph algorithms, NP-completeness. Formal proof of correctness and time complexity.",BSCS
+CS310,Database Systems,3,all,CS201,,,C,"Fall,Spring","Relational model, SQL, normalization, transactions, indexing, and query optimization. Requires CS201 with a grade of C or better.",BSCS
+CS315,Operating Systems,3,all,"CS201,CS202",,,,Fall,"Processes, threads, scheduling, memory management, file systems, and concurrency. Programming projects in C.",BSCS
+CS320,Software Engineering,3,any,"CS201,CS301",,,,Spring,"Software development lifecycle, requirements engineering, design patterns, testing strategies, and version control. Accepts CS201 or CS301 as prerequisite.",BSCS
+CS350,Computer Networks,3,all,CS315,,,,Spring,"Network protocols, OSI model, TCP/IP, routing, security fundamentals, and socket programming.",BSCS
+CS401,Machine Learning,3,choose,"CS301,CS310,MATH250",2,,,"Fall,Spring","Supervised and unsupervised learning, neural networks, evaluation methods, and feature engineering. Requires any 2 of: CS301, CS310, MATH250.",BSCS
+CS490,Senior Capstone Project I,3,all,"CS301,CS315,CS320",,CS491,,"Fall","First semester of a two-semester capstone. Project selection, team formation, requirements specification, system design, and prototype. CS491 must be taken concurrently.",BSCS
+CS491,Senior Capstone Project II,3,all,"CS301,CS315,CS320",,CS490,,"Spring","Second semester of capstone. Full implementation, testing, deployment, and public presentation of the completed system. CS490 must be taken concurrently.",BSCS
+MATH250,Linear Algebra and Probability,3,all,CS102,,,,,"Vectors, matrices, eigenvalues, and probability theory for computer scientists. Cross-listed with MATH department.",BSCS

@@ -1,0 +1,1419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="Spring-Mass-Damper Impulse Response - Interactive Educational Demonstration">
+<meta name="keywords" content="spring mass damper, vibrations, dynamics, impulse response, transfer function">
+<title>Spring-Mass-Damper Impulse Response | Dynamics &amp; Vibrations Demo</title>
+<style type="text/css">
+/* ============================================================
+   EARLY-2000s ACADEMIC PAGE STYLESHEET
+   Last revised: March 2003
+   ============================================================ */
+
+body {
+    margin: 0;
+    padding: 8px 0;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 11px;
+    color: #000000;
+    background-color: #C0C0C0;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAJklEQVQoU2NkYGD4z8BAAoxIXNiwYQMjIyMDIxGKRzUMKg0AAAA2B94BxA7UAAAAAElFTkSuQmCC");
+    background-repeat: repeat;
+}
+
+/* Page wrapper */
+#page-wrapper {
+    width: 800px;
+    margin: 0 auto;
+    background-color: #F0F0F0;
+    border: 2px outset #DFDFDF;
+}
+
+/* ============================================================
+   BANNER
+   ============================================================ */
+#banner {
+    background: linear-gradient(to right, #000080, #4169E1);
+    padding: 12px 16px 10px 16px;
+    border-bottom: 2px solid #000060;
+}
+
+#banner h1 {
+    margin: 0 0 4px 0;
+    padding: 0;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    color: #FFFFFF;
+    text-shadow: none;
+    letter-spacing: 0.5px;
+}
+
+#banner .subtitle {
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    color: #AACCFF;
+    margin: 0;
+}
+
+#banner .new-badge {
+    display: inline;
+    color: #FFFF00;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: Tahoma, Arial, sans-serif;
+    animation: blink-animation 1s step-start infinite;
+    -webkit-animation: blink-animation 1s step-start infinite;
+    margin-left: 8px;
+}
+
+@keyframes blink-animation {
+    0%   { visibility: visible; }
+    50%  { visibility: hidden; }
+    100% { visibility: visible; }
+}
+@-webkit-keyframes blink-animation {
+    0%   { visibility: visible; }
+    50%  { visibility: hidden; }
+    100% { visibility: visible; }
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+#navbar {
+    background-color: #D4D4D4;
+    border-top: 1px solid #FFFFFF;
+    border-bottom: 2px solid #888888;
+    padding: 4px 8px;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+#navbar a {
+    color: #000080;
+    text-decoration: none;
+    margin-right: 16px;
+}
+
+#navbar a:hover {
+    color: #CC0000;
+    text-decoration: underline;
+}
+
+/* ============================================================
+   SECTION HEADERS
+   ============================================================ */
+.section-header {
+    background-color: #000080;
+    color: #FFFFFF;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px;
+    margin: 0;
+    border-top: 1px solid #4169E1;
+    border-bottom: 1px solid #000060;
+}
+
+/* ============================================================
+   CONTENT PANELS
+   ============================================================ */
+.content-area {
+    padding: 10px 12px;
+}
+
+.panel {
+    background-color: #E8E8E8;
+    border: 2px inset #DFDFDF;
+    padding: 8px 10px;
+    margin: 6px 0;
+}
+
+/* ============================================================
+   TRANSFER FUNCTION TABLE FRACTIONS
+   ============================================================ */
+.tf-container {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 13px;
+    margin: 8px 0;
+}
+
+.tf-label {
+    display: inline;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.fraction {
+    display: inline-table;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0 2px;
+}
+
+.fraction .numerator {
+    display: table-row;
+    white-space: nowrap;
+}
+
+.fraction .fraction-line {
+    display: table-row;
+}
+
+.fraction .fraction-line span {
+    display: table-cell;
+    border-top: 1px solid #000000;
+    font-size: 1px;
+    line-height: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.fraction .denominator {
+    display: table-row;
+    white-space: nowrap;
+}
+
+.tf-note {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 10px;
+    color: #555555;
+    font-style: italic;
+    margin: 2px 0 0 0;
+}
+
+/* ============================================================
+   VALUE BOXES (pale yellow readouts)
+   ============================================================ */
+.value-box {
+    background-color: #FFFFCC;
+    border: 1px solid #999999;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 11px;
+    padding: 1px 4px;
+    display: inline-block;
+    min-width: 60px;
+    text-align: right;
+}
+
+/* ============================================================
+   SLIDERS
+   ============================================================ */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 260px;
+    height: 18px;
+    background: #D4D4D4;
+    border: 2px inset #DFDFDF;
+    padding: 2px;
+    outline: none;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 18px;
+    background: #D4D4D4;
+    border: 2px outset #DFDFDF;
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 18px;
+    background: #D4D4D4;
+    border: 2px outset #DFDFDF;
+    cursor: pointer;
+    border-radius: 0;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    background: transparent;
+    height: 100%;
+}
+
+input[type="range"]::-moz-range-track {
+    background: transparent;
+    height: 100%;
+}
+
+/* ============================================================
+   PARAMETER TABLE
+   ============================================================ */
+.param-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.param-table td {
+    padding: 4px 6px;
+    vertical-align: middle;
+}
+
+.param-label {
+    font-family: Tahoma, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 11px;
+    width: 120px;
+    color: #000000;
+}
+
+.derived-table {
+    border-collapse: collapse;
+    margin-top: 6px;
+}
+
+.derived-table td {
+    padding: 3px 8px;
+    vertical-align: middle;
+}
+
+/* ============================================================
+   DAMPING REGIME TAG
+   ============================================================ */
+#damping-tag {
+    font-family: Tahoma, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px 10px;
+    border: 2px outset #DFDFDF;
+    display: inline-block;
+    margin: 4px 0;
+}
+
+/* ============================================================
+   UNDER CONSTRUCTION STRIPE
+   ============================================================ */
+#construction-stripe {
+    height: 18px;
+    background: repeating-linear-gradient(
+        -45deg,
+        #FFDD00,
+        #FFDD00 8px,
+        #000000 8px,
+        #000000 16px
+    );
+    border-top: 2px solid #888800;
+    border-bottom: 2px solid #888800;
+    overflow: hidden;
+    position: relative;
+}
+
+#construction-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    color: #000000;
+    background-color: #FFDD00;
+    padding: 0 6px;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   CANVAS / PLOT AREA
+   ============================================================ */
+canvas {
+    background-color: #FFFFFF;
+    border: 2px inset #DFDFDF;
+    display: block;
+}
+
+.plot-title {
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: #000080;
+    text-align: center;
+    padding: 3px 0;
+    background-color: #E8E8E8;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.plot-cell {
+    padding: 4px 6px;
+    vertical-align: top;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer {
+    background-color: #C8C8C8;
+    border-top: 2px inset #DFDFDF;
+    padding: 6px 10px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 10px;
+    color: #333333;
+    text-align: center;
+}
+
+#hit-counter {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 13px;
+    color: #00FF00;
+    background-color: #000000;
+    padding: 1px 6px;
+    border: 1px inset #444444;
+    letter-spacing: 2px;
+    display: inline-block;
+    margin: 3px 0;
+}
+
+/* ============================================================
+   MISC UTILITIES
+   ============================================================ */
+.hr-xp {
+    border: none;
+    border-top: 1px solid #AAAAAA;
+    border-bottom: 1px solid #FFFFFF;
+    margin: 6px 0;
+}
+
+.section-anchor {
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
+
+/* Specific TF output */
+#specific-tf-output {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 13px;
+    padding: 6px 0;
+}
+</style>
+</head>
+<body>
+
+<div id="page-wrapper">
+
+    <!-- ============================================================
+         BANNER
+         ============================================================ -->
+    <div id="banner">
+        <h1>Spring-Mass-Damper Impulse Response
+            <span class="new-badge">&#9733; NEW! &#9733;</span>
+        </h1>
+        <p class="subtitle">Dynamics &amp; Vibrations &nbsp;&mdash;&nbsp; Interactive Demonstration</p>
+    </div>
+
+    <!-- ============================================================
+         NAVBAR
+         ============================================================ -->
+    <div id="navbar">
+        &raquo; <a href="#tf">Transfer Function</a>
+        &raquo; <a href="#sliders">Parameters</a>
+        &raquo; <a href="#specific-tf">Specific TF</a>
+        &raquo; <a href="#plots">Plots</a>
+    </div>
+
+    <!-- ============================================================
+         SECTION 1: TRANSFER FUNCTION
+         ============================================================ -->
+    <a class="section-anchor" id="tf"></a>
+    <div class="section-header">&raquo; Transfer Function &mdash; 2nd Order System</div>
+    <div class="content-area">
+        <div class="panel">
+            <table border="0" cellpadding="2" cellspacing="0">
+                <tr>
+                    <td style="padding-right:10px; vertical-align:top;">
+                        <p style="font-family:Tahoma,Arial,sans-serif; font-weight:bold; font-size:11px; margin:0 0 6px 0; color:#000080;">Physical Form:</p>
+                        <div class="tf-container">
+                            <span class="tf-label">X(s)&nbsp;/&nbsp;F(s)&nbsp;=&nbsp;</span>
+                            <span class="fraction">
+                                <span class="numerator">&nbsp;&nbsp;1&nbsp;&nbsp;</span>
+                                <span class="fraction-line"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                                <span class="denominator">ms&sup2;&nbsp;+&nbsp;cs&nbsp;+&nbsp;k</span>
+                            </span>
+                        </div>
+                        <p class="tf-note">where m = mass [kg], c = damping [N&middot;s/m], k = stiffness [N/m]</p>
+                    </td>
+                    <td style="width:20px; text-align:center; vertical-align:middle; font-size:20px; color:#888888;">&nbsp;</td>
+                    <td style="padding-left:10px; vertical-align:top; border-left:1px solid #CCCCCC;">
+                        <p style="font-family:Tahoma,Arial,sans-serif; font-weight:bold; font-size:11px; margin:0 0 6px 0; color:#000080;">Standard Form:</p>
+                        <div class="tf-container">
+                            <span class="tf-label">X(s)&nbsp;/&nbsp;F(s)&nbsp;=&nbsp;</span>
+                            <span class="fraction">
+                                <span class="numerator">&nbsp;&nbsp;(1/m)&nbsp;&nbsp;</span>
+                                <span class="fraction-line"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                                <span class="denominator">s&sup2;&nbsp;+&nbsp;2&zeta;&omega;&#x2099;s&nbsp;+&nbsp;&omega;&#x2099;&sup2;</span>
+                            </span>
+                        </div>
+                        <p class="tf-note">where &zeta; = damping ratio, &omega;&#x2099; = natural frequency [rad/s]</p>
+                    </td>
+                </tr>
+            </table>
+
+            <hr class="hr-xp">
+
+            <table border="0" cellpadding="3" cellspacing="0" style="font-family:Verdana,Geneva,sans-serif; font-size:11px;">
+                <tr>
+                    <td style="font-weight:bold; color:#000080; font-family:Tahoma,Arial,sans-serif;">Key Relations:</td>
+                    <td style="font-family:'Courier New',Courier,monospace; font-size:12px;">
+                        &omega;&#x2099; = &radic;(k/m)
+                        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        &zeta; = c / (2&radic;(mk))
+                        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        &tau; = 1 / (&zeta;&omega;&#x2099;)
+                        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                        &omega;&#x2064; = &omega;&#x2099;&radic;(1 &minus; &zeta;&sup2;)
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Impulse Response Formulas -->
+        <div class="panel" style="margin-top:8px;">
+            <p style="font-family:Tahoma,Arial,sans-serif; font-weight:bold; font-size:11px; margin:0 0 6px 0; color:#000080;">Impulse Response h(t) by Damping Regime:</p>
+            <table border="0" cellpadding="4" cellspacing="0" width="100%">
+                <tr>
+                    <td style="width:33%; vertical-align:top; border-right:1px solid #CCCCCC; padding-right:8px;">
+                        <span style="font-family:Tahoma,Arial,sans-serif; font-weight:bold; font-size:11px; color:#CC0000;">Underdamped (&zeta; &lt; 1):</span><br>
+                        <span style="font-family:'Courier New',Courier,monospace; font-size:11px;">
+                            x(t) = exp(&minus;&zeta;&omega;&#x2099;t)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&times; sin(&omega;&#x2064;t) / (m&omega;&#x2064;)
+                        </span>
+                    </td>
+                    <td style="width:33%; vertical-align:top; border-right:1px solid #CCCCCC; padding:0 8px;">
+                        <span style="font-family:Tahoma,Arial,sans-serif; font-weight:bold; font-size:11px; color:#E68A00;">Critically Damped (&zeta; = 1):</span><br>
+                        <span style="font-family:'Courier New',Courier,monospace; font-size:11px;">
+                            x(t) = (t/m)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&times; exp(&minus;&omega;&#x2099;t)
+                        </span>
+                    </td>
+                    <td style="width:34%; vertical-align:top; padding-left:8px;">
+                        <span style="font-family:Tahoma,Arial,sans-serif; font-weight:bold; font-size:11px; color:#003399;">Overdamped (&zeta; &gt; 1):</span><br>
+                        <span style="font-family:'Courier New',Courier,monospace; font-size:11px;">
+                            x(t) = exp(&minus;&zeta;&omega;&#x2099;t)<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&times; sinh(&omega;&#x2095;t) / (m&omega;&#x2095;)
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         UNDER CONSTRUCTION STRIPE
+         ============================================================ -->
+    <div id="construction-stripe">
+        <span id="construction-text">&#9888; &nbsp; UNDER CONSTRUCTION &nbsp; &#9888;</span>
+    </div>
+
+    <!-- ============================================================
+         SECTION 2: PARAMETERS (SLIDERS)
+         ============================================================ -->
+    <a class="section-anchor" id="sliders"></a>
+    <div class="section-header">&raquo; System Parameters &mdash; Adjust Sliders</div>
+    <div class="content-area">
+        <div class="panel">
+            <table class="param-table">
+                <tr>
+                    <td class="param-label">Mass &nbsp;<em>m</em> [kg]:</td>
+                    <td>
+                        <input type="range" id="slider-m" min="0.1" max="10" step="0.1" value="1">
+                    </td>
+                    <td style="padding-left:6px;">
+                        <span class="value-box" id="val-m">1.0</span>
+                    </td>
+                    <td style="padding-left:12px; font-family:Verdana,Geneva,sans-serif; font-size:10px; color:#555555;">
+                        Range: 0.1 &ndash; 10 kg
+                    </td>
+                </tr>
+                <tr>
+                    <td class="param-label">Damping &nbsp;<em>c</em> [N&middot;s/m]:</td>
+                    <td>
+                        <input type="range" id="slider-c" min="0" max="20" step="0.1" value="2">
+                    </td>
+                    <td style="padding-left:6px;">
+                        <span class="value-box" id="val-c">2.0</span>
+                    </td>
+                    <td style="padding-left:12px; font-family:Verdana,Geneva,sans-serif; font-size:10px; color:#555555;">
+                        Range: 0 &ndash; 20 N&middot;s/m
+                    </td>
+                </tr>
+                <tr>
+                    <td class="param-label">Stiffness &nbsp;<em>k</em> [N/m]:</td>
+                    <td>
+                        <input type="range" id="slider-k" min="1" max="100" step="0.5" value="10">
+                    </td>
+                    <td style="padding-left:6px;">
+                        <span class="value-box" id="val-k">10.0</span>
+                    </td>
+                    <td style="padding-left:12px; font-family:Verdana,Geneva,sans-serif; font-size:10px; color:#555555;">
+                        Range: 1 &ndash; 100 N/m
+                    </td>
+                </tr>
+            </table>
+
+            <hr class="hr-xp">
+
+            <!-- Derived parameters -->
+            <table class="derived-table">
+                <tr>
+                    <td class="param-label" style="font-family:Tahoma,Arial,sans-serif; font-weight:bold; font-size:11px;">
+                        Natural Freq &nbsp;&omega;&#x2099; [rad/s]:
+                    </td>
+                    <td><span class="value-box" id="val-wn">3.162</span></td>
+
+                    <td style="width:20px;"></td>
+
+                    <td class="param-label" style="font-family:Tahoma,Arial,sans-serif; font-weight:bold; font-size:11px;">
+                        Damping Ratio &nbsp;&zeta;:
+                    </td>
+                    <td><span class="value-box" id="val-zeta">0.3162</span></td>
+                </tr>
+                <tr>
+                    <td class="param-label" style="font-family:Tahoma,Arial,sans-serif; font-weight:bold; font-size:11px;">
+                        Time Constant &nbsp;&tau; [s]:
+                    </td>
+                    <td><span class="value-box" id="val-tau">1.000</span></td>
+
+                    <td style="width:20px;"></td>
+
+                    <td class="param-label" style="font-family:Tahoma,Arial,sans-serif; font-weight:bold; font-size:11px;">
+                        Damped Freq &nbsp;&omega;&#x2064; [rad/s]:
+                    </td>
+                    <td><span class="value-box" id="val-wd">2.981</span></td>
+                </tr>
+            </table>
+
+            <div style="margin-top:8px;">
+                <span style="font-family:Tahoma,Arial,sans-serif; font-weight:bold; font-size:11px;">Damping Regime:</span>
+                &nbsp;
+                <span id="damping-tag" style="color:#FFFFFF;">Underdamped</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         SECTION 3: SPECIFIC TRANSFER FUNCTION
+         ============================================================ -->
+    <a class="section-anchor" id="specific-tf"></a>
+    <div class="section-header">&raquo; Specific Transfer Function &mdash; Current Parameters</div>
+    <div class="content-area">
+        <div class="panel">
+            <p style="font-family:Tahoma,Arial,sans-serif; font-size:11px; margin:0 0 6px 0; color:#555555; font-style:italic;">
+                Updates live as you adjust the sliders above.
+            </p>
+            <div id="specific-tf-output">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         SECTION 4: PLOTS
+         ============================================================ -->
+    <a class="section-anchor" id="plots"></a>
+    <div class="section-header">&raquo; Plots &mdash; Pole-Zero Map &amp; Impulse Response</div>
+    <div class="content-area">
+        <div class="panel" style="padding:4px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <td class="plot-cell" width="50%" style="border-right:1px solid #CCCCCC;">
+                        <div class="plot-title">Pole-Zero Map (s-Plane)</div>
+                        <canvas id="canvas-pz" width="370" height="280"></canvas>
+                    </td>
+                    <td class="plot-cell" width="50%">
+                        <div class="plot-title">Impulse Response x(t)</div>
+                        <canvas id="canvas-ir" width="370" height="280"></canvas>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Legend -->
+        <div class="panel" style="margin-top:6px; padding:5px 8px;">
+            <table border="0" cellpadding="3" cellspacing="0">
+                <tr>
+                    <td style="font-family:Tahoma,Arial,sans-serif; font-weight:bold; font-size:11px; color:#000080;">Plot Legend:</td>
+                    <td style="font-family:Verdana,Geneva,sans-serif; font-size:10px; padding-left:10px;">
+                        <span style="color:#CC0000; font-weight:bold;">&#10005;</span> Poles (s-plane)
+                    </td>
+                    <td style="font-family:Verdana,Geneva,sans-serif; font-size:10px; padding-left:10px;">
+                        <span style="color:#0000CC; font-weight:bold;">&#8212;&#8212;</span> Response x(t)
+                    </td>
+                    <td style="font-family:Verdana,Geneva,sans-serif; font-size:10px; padding-left:10px;">
+                        <span style="color:#CC6600; font-weight:bold;">- - -</span> Envelope &plusmn;A(t) (underdamped)
+                    </td>
+                    <td style="font-family:Verdana,Geneva,sans-serif; font-size:10px; padding-left:10px;">
+                        <span style="color:#008800; font-weight:bold;">- - -</span> &tau; / &sigma; reference lines
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <div id="footer">
+        <table border="0" cellpadding="2" cellspacing="0" width="100%">
+            <tr>
+                <td style="text-align:left; vertical-align:middle;">
+                    Best viewed in Internet Explorer 6.0 at 1024&times;768<br>
+                    Last Updated: March 14, 2003
+                </td>
+                <td style="text-align:center; vertical-align:middle;">
+                    Visitors:<br>
+                    <span id="hit-counter">004217</span>
+                </td>
+                <td style="text-align:right; vertical-align:middle;">
+                    &copy; 2003 Department of Mechanical Engineering.<br>
+                    All rights reserved.
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div><!-- end #page-wrapper -->
+
+<!-- ============================================================
+     JAVASCRIPT — All computation, rendering, and interactivity
+     ============================================================ -->
+<script type="text/javascript">
+// ================================================================
+// UTILITY FUNCTIONS
+// ================================================================
+
+/**
+ * Round a value to N significant figures.
+ * Returns a plain number string suitable for display.
+ */
+function sigFig(val, n) {
+    if (!isFinite(val) || isNaN(val)) return "N/A";
+    if (val === 0) return "0";
+    var magnitude = Math.floor(Math.log10(Math.abs(val)));
+    var factor = Math.pow(10, n - 1 - magnitude);
+    var rounded = Math.round(val * factor) / factor;
+    // Format to avoid ugly floating-point artifacts
+    var decimalPlaces = Math.max(0, n - 1 - magnitude);
+    if (decimalPlaces > 10) decimalPlaces = 10;
+    return rounded.toFixed(decimalPlaces);
+}
+
+/**
+ * Format a coefficient for display in TF denominator.
+ * Returns a string like "+2.50s" or "-1.00s²"
+ */
+function fmtCoeff(val, n) {
+    if (!isFinite(val)) return "?";
+    return sigFig(val, n);
+}
+
+// ================================================================
+// PHYSICS COMPUTATION
+// ================================================================
+
+function computeParams(m, c, k) {
+    var wn   = Math.sqrt(k / m);
+    var zeta = c / (2.0 * Math.sqrt(m * k));
+    var tau  = (zeta > 0) ? 1.0 / (zeta * wn) : Infinity;
+    var wd   = (zeta < 1.0) ? wn * Math.sqrt(1.0 - zeta * zeta) : 0.0;
+    var wh   = (zeta > 1.0) ? wn * Math.sqrt(zeta * zeta - 1.0) : 0.0;
+
+    // Regime: treat |zeta - 1| < 0.001 as critically damped
+    var regime;
+    if (Math.abs(zeta - 1.0) < 0.001) {
+        regime = "critical";
+    } else if (zeta < 1.0) {
+        regime = "under";
+    } else {
+        regime = "over";
+    }
+
+    return { m: m, c: c, k: k, wn: wn, zeta: zeta, tau: tau, wd: wd, wh: wh, regime: regime };
+}
+
+/**
+ * Compute impulse response x at time t.
+ * Returns 0 for t < 0.
+ */
+function impulseResponse(t, p) {
+    if (t < 0) return 0;
+    var m = p.m, wn = p.wn, zeta = p.zeta;
+
+    if (p.regime === "under") {
+        // x(t) = (1/(m*wd)) * exp(-zeta*wn*t) * sin(wd*t)
+        return (1.0 / (m * p.wd)) * Math.exp(-zeta * wn * t) * Math.sin(p.wd * t);
+    } else if (p.regime === "critical") {
+        // x(t) = (t/m) * exp(-wn*t)
+        return (t / m) * Math.exp(-wn * t);
+    } else {
+        // Overdamped: x(t) = (1/(m*wh)) * exp(-zeta*wn*t) * sinh(wh*t)
+        // Guard against sinh overflow for large t
+        var arg = p.wh * t;
+        var zetawnT = zeta * wn * t;
+        // sinh(x) = (e^x - e^-x)/2, but e^x * e^{-zetaWnT} for large x:
+        // effectively exp((wh - zeta*wn)*t) / 2 for large t
+        // since wh < zeta*wn (always for overdamped), this decays
+        var sinhVal;
+        if (arg > 400) {
+            // Use asymptotic: sinh(arg) ~ exp(arg)/2
+            // combined: exp(-zetawnt) * sinh(wht) ~ exp(-zetawnt + wht)/2
+            // = exp(-(zeta*wn - wh)*t)/2  — this decays since zeta*wn > wh
+            sinhVal = Math.exp(arg) / 2.0;
+            return (1.0 / (m * p.wh)) * Math.exp(-zetawnT) * sinhVal;
+        }
+        sinhVal = Math.sinh(arg);
+        return (1.0 / (m * p.wh)) * Math.exp(-zetawnT) * sinhVal;
+    }
+}
+
+/**
+ * Envelope magnitude for underdamped case: A(t) = exp(-zeta*wn*t) / (m*wd)
+ */
+function envelope(t, p) {
+    if (p.regime !== "under") return 0;
+    return (1.0 / (p.m * p.wd)) * Math.exp(-p.zeta * p.wn * t);
+}
+
+/**
+ * Compute poles in the s-plane.
+ * Returns array of {re, im} objects.
+ */
+function computePoles(p) {
+    if (p.regime === "under") {
+        return [
+            { re: -p.zeta * p.wn, im:  p.wd },
+            { re: -p.zeta * p.wn, im: -p.wd }
+        ];
+    } else if (p.regime === "critical") {
+        return [
+            { re: -p.wn, im: 0 },
+            { re: -p.wn, im: 0 }  // repeated
+        ];
+    } else {
+        return [
+            { re: -p.zeta * p.wn + p.wh, im: 0 },
+            { re: -p.zeta * p.wn - p.wh, im: 0 }
+        ];
+    }
+}
+
+// ================================================================
+// TIME HORIZON COMPUTATION
+// ================================================================
+function computeTimeHorizon(p) {
+    var tau5 = isFinite(p.tau) ? 5.0 * p.tau : 0;
+    var wn5  = (p.wn > 0) ? 5.0 / p.wn : 0;
+    var tMax = Math.max(tau5, wn5);
+    // Cap at 200 s
+    if (tMax > 200) tMax = 200;
+    if (tMax < 0.1) tMax = 0.1;
+    return tMax;
+}
+
+// ================================================================
+// DOM HELPERS
+// ================================================================
+
+function setTextContent(id, text) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = text;
+}
+
+function setInnerHTML(id, html) {
+    var el = document.getElementById(id);
+    if (el) el.innerHTML = html;
+}
+
+// ================================================================
+// CANVAS DRAWING: POLE-ZERO MAP
+// ================================================================
+
+function drawPoleZeroMap(canvas, p) {
+    var ctx = canvas.getContext("2d");
+    var W = canvas.width;
+    var H = canvas.height;
+
+    // Clear
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, W, H);
+
+    var poles  = computePoles(p);
+    var sigmaD = -p.zeta * p.wn; // real part of poles
+
+    // Determine axis range
+    var maxExtent = p.wn;
+    for (var i = 0; i < poles.length; i++) {
+        maxExtent = Math.max(maxExtent, Math.abs(poles[i].re), Math.abs(poles[i].im));
+    }
+    maxExtent = 1.35 * Math.max(maxExtent, 0.5);
+
+    // Margins
+    var ML = 52, MR = 18, MT = 18, MB = 38;
+    var plotW = W - ML - MR;
+    var plotH = H - MT - MB;
+
+    // Mapping functions
+    function xToCanvas(re) {
+        return ML + (re + maxExtent) / (2.0 * maxExtent) * plotW;
+    }
+    function yToCanvas(im) {
+        return MT + (maxExtent - im) / (2.0 * maxExtent) * plotH;
+    }
+    function canvasToRe(cx) {
+        return (cx - ML) / plotW * (2.0 * maxExtent) - maxExtent;
+    }
+
+    // Draw grid
+    ctx.strokeStyle = "#E0E0E0";
+    ctx.lineWidth = 1;
+    ctx.setLineDash([]);
+    var nGridLines = 5;
+    for (var g = 0; g <= nGridLines; g++) {
+        var frac = g / nGridLines;
+        // Vertical grid
+        var gx = ML + frac * plotW;
+        ctx.beginPath(); ctx.moveTo(gx, MT); ctx.lineTo(gx, MT + plotH); ctx.stroke();
+        // Horizontal grid
+        var gy = MT + frac * plotH;
+        ctx.beginPath(); ctx.moveTo(ML, gy); ctx.lineTo(ML + plotW, gy); ctx.stroke();
+    }
+
+    // Draw axes
+    ctx.strokeStyle = "#000000";
+    ctx.lineWidth = 1;
+    ctx.setLineDash([]);
+    var cx0 = xToCanvas(0);
+    var cy0 = yToCanvas(0);
+    // Real axis (horizontal)
+    ctx.beginPath(); ctx.moveTo(ML, cy0); ctx.lineTo(ML + plotW, cy0); ctx.stroke();
+    // Imaginary axis (vertical)
+    ctx.beginPath(); ctx.moveTo(cx0, MT); ctx.lineTo(cx0, MT + plotH); ctx.stroke();
+
+    // Axis arrow heads
+    ctx.fillStyle = "#000000";
+    // Right arrow on real axis
+    ctx.beginPath();
+    ctx.moveTo(ML + plotW, cy0);
+    ctx.lineTo(ML + plotW - 6, cy0 - 3);
+    ctx.lineTo(ML + plotW - 6, cy0 + 3);
+    ctx.closePath(); ctx.fill();
+    // Up arrow on imag axis
+    ctx.beginPath();
+    ctx.moveTo(cx0, MT);
+    ctx.lineTo(cx0 - 3, MT + 6);
+    ctx.lineTo(cx0 + 3, MT + 6);
+    ctx.closePath(); ctx.fill();
+
+    // Axis labels
+    ctx.fillStyle = "#000080";
+    ctx.font = "bold 10px Tahoma, Arial, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("Re(σ)", ML + plotW - 2, cy0 + 14);
+    ctx.save();
+    ctx.translate(cx0, MT + 2);
+    ctx.fillText("Im(jω)", 0, 0);
+    ctx.restore();
+
+    // Axis tick marks and labels
+    ctx.fillStyle = "#333333";
+    ctx.font = "9px Verdana, Geneva, sans-serif";
+    var nTicks = 4;
+    for (var t = -nTicks; t <= nTicks; t++) {
+        if (t === 0) continue;
+        var tickVal = t * maxExtent / nTicks;
+        var tickValR = Math.round(tickVal * 100) / 100;
+
+        // Real axis ticks
+        var tx = xToCanvas(tickVal);
+        if (tx > ML && tx < ML + plotW) {
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 1;
+            ctx.setLineDash([]);
+            ctx.beginPath(); ctx.moveTo(tx, cy0 - 3); ctx.lineTo(tx, cy0 + 3); ctx.stroke();
+            ctx.fillStyle = "#333333";
+            ctx.textAlign = "center";
+            ctx.fillText(tickValR.toFixed(1), tx, cy0 + 12);
+        }
+
+        // Imaginary axis ticks
+        var ty = yToCanvas(tickVal);
+        if (ty > MT && ty < MT + plotH) {
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 1;
+            ctx.setLineDash([]);
+            ctx.beginPath(); ctx.moveTo(cx0 - 3, ty); ctx.lineTo(cx0 + 3, ty); ctx.stroke();
+            ctx.fillStyle = "#333333";
+            ctx.textAlign = "right";
+            ctx.fillText(tickValR.toFixed(1), cx0 - 5, ty + 3);
+        }
+    }
+
+    // Draw |ωn| circle
+    ctx.strokeStyle = "#888888";
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+    var wnPx = (p.wn / (2.0 * maxExtent)) * plotW;
+    ctx.beginPath();
+    ctx.arc(xToCanvas(0), yToCanvas(0), wnPx, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    // Label the circle
+    ctx.fillStyle = "#888888";
+    ctx.font = "9px Verdana, Geneva, sans-serif";
+    ctx.textAlign = "left";
+    var circLabelX = xToCanvas(0) + wnPx * Math.cos(-Math.PI / 4);
+    var circLabelY = yToCanvas(0) + wnPx * Math.sin(-Math.PI / 4);
+    if (circLabelX < ML + plotW - 10 && circLabelY < MT + plotH - 4) {
+        ctx.fillText("ωₙ=" + sigFig(p.wn, 3), circLabelX + 2, circLabelY + 2);
+    }
+
+    // Draw σ = -ζωn dashed vertical line
+    var sigmaX = xToCanvas(sigmaD);
+    if (sigmaX > ML && sigmaX < ML + plotW) {
+        ctx.strokeStyle = "#008800";
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 3]);
+        ctx.beginPath();
+        ctx.moveTo(sigmaX, MT);
+        ctx.lineTo(sigmaX, MT + plotH);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = "#008800";
+        ctx.font = "bold 9px Tahoma, Arial, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("σ = −ζωₙ", sigmaX, MT + plotH + 12);
+        ctx.fillText("(" + sigFig(sigmaD, 3) + ")", sigmaX, MT + plotH + 22);
+    }
+
+    // Draw poles as X markers
+    var poleOffsets = [];
+    for (var pi = 0; pi < poles.length; pi++) {
+        var px = xToCanvas(poles[pi].re);
+        var py = yToCanvas(poles[pi].im);
+
+        // Check if this position was already drawn (repeated poles)
+        var alreadyDrawn = false;
+        for (var pj = 0; pj < poleOffsets.length; pj++) {
+            if (Math.abs(poleOffsets[pj][0] - px) < 2 && Math.abs(poleOffsets[pj][1] - py) < 2) {
+                alreadyDrawn = true;
+                break;
+            }
+        }
+
+        ctx.strokeStyle = "#CC0000";
+        ctx.lineWidth = 2.5;
+        ctx.setLineDash([]);
+        var sz = 7;
+        ctx.beginPath();
+        ctx.moveTo(px - sz, py - sz); ctx.lineTo(px + sz, py + sz);
+        ctx.moveTo(px + sz, py - sz); ctx.lineTo(px - sz, py + sz);
+        ctx.stroke();
+
+        // Label the pole coordinates
+        var labelText = "(" + sigFig(poles[pi].re, 3);
+        if (Math.abs(poles[pi].im) > 1e-6) {
+            labelText += (poles[pi].im >= 0 ? " + " : " − ") + sigFig(Math.abs(poles[pi].im), 3) + "j";
+        }
+        labelText += ")";
+
+        ctx.fillStyle = "#CC0000";
+        ctx.font = "bold 8px Tahoma, Arial, sans-serif";
+        var labelOffsetY = (poles[pi].im >= 0) ? -sz - 4 : sz + 10;
+        if (alreadyDrawn) { labelOffsetY = sz + 20; }
+        ctx.textAlign = "center";
+
+        // Clamp label within canvas
+        var labelY = py + labelOffsetY;
+        if (labelY < MT + 8) labelY = MT + 8;
+        if (labelY > MT + plotH - 2) labelY = MT + plotH - 2;
+        ctx.fillText(labelText, px, labelY);
+
+        if (alreadyDrawn) {
+            ctx.fillText("(repeated)", px, labelY + 10);
+        }
+
+        poleOffsets.push([px, py]);
+    }
+}
+
+// ================================================================
+// CANVAS DRAWING: IMPULSE RESPONSE
+// ================================================================
+
+function drawImpulseResponse(canvas, p) {
+    var ctx = canvas.getContext("2d");
+    var W = canvas.width;
+    var H = canvas.height;
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, W, H);
+
+    var tMax = computeTimeHorizon(p);
+    var N = 600;
+
+    // Sample x(t)
+    var tArr = [];
+    var xArr = [];
+    var xPeak = 0;
+
+    for (var i = 0; i <= N; i++) {
+        var t = i / N * tMax;
+        var x = impulseResponse(t, p);
+        tArr.push(t);
+        xArr.push(x);
+        if (Math.abs(x) > xPeak) xPeak = Math.abs(x);
+    }
+
+    if (xPeak < 1e-12) xPeak = 1e-6;
+
+    // y-axis range
+    var yRange = 1.15 * xPeak;
+    if (yRange < 1e-10) yRange = 1e-10;
+
+    // Margins
+    var ML = 58, MR = 16, MT = 16, MB = 38;
+    var plotW = W - ML - MR;
+    var plotH = H - MT - MB;
+
+    // Mapping functions
+    function tToCanvas(t) {
+        return ML + (t / tMax) * plotW;
+    }
+    function xToCanvas(x) {
+        return MT + (yRange - x) / (2.0 * yRange) * plotH;
+    }
+
+    // Grid
+    ctx.strokeStyle = "#E0E0E0";
+    ctx.lineWidth = 1;
+    ctx.setLineDash([]);
+    var nGridX = 5, nGridY = 4;
+    for (var gi = 0; gi <= nGridX; gi++) {
+        var gx = ML + gi / nGridX * plotW;
+        ctx.beginPath(); ctx.moveTo(gx, MT); ctx.lineTo(gx, MT + plotH); ctx.stroke();
+    }
+    for (var gj = 0; gj <= nGridY * 2; gj++) {
+        var gy = MT + gj / (nGridY * 2) * plotH;
+        ctx.beginPath(); ctx.moveTo(ML, gy); ctx.lineTo(ML + plotW, gy); ctx.stroke();
+    }
+
+    // Axes
+    ctx.strokeStyle = "#000000";
+    ctx.lineWidth = 1;
+    ctx.setLineDash([]);
+    var cy0 = xToCanvas(0);
+    // x-axis (zero line)
+    ctx.beginPath(); ctx.moveTo(ML, cy0); ctx.lineTo(ML + plotW, cy0); ctx.stroke();
+    // y-axis (t=0 line)
+    ctx.beginPath(); ctx.moveTo(ML, MT); ctx.lineTo(ML, MT + plotH); ctx.stroke();
+
+    // Axis arrows
+    ctx.fillStyle = "#000000";
+    ctx.beginPath();
+    ctx.moveTo(ML + plotW, cy0);
+    ctx.lineTo(ML + plotW - 6, cy0 - 3);
+    ctx.lineTo(ML + plotW - 6, cy0 + 3);
+    ctx.closePath(); ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(ML, MT);
+    ctx.lineTo(ML - 3, MT + 6);
+    ctx.lineTo(ML + 3, MT + 6);
+    ctx.closePath(); ctx.fill();
+
+    // Axis labels
+    ctx.fillStyle = "#000080";
+    ctx.font = "bold 10px Tahoma, Arial, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("t [s]", ML + plotW - 4, cy0 + 14);
+    ctx.save();
+    ctx.translate(12, MT + plotH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText("x(t) [m]", 0, 0);
+    ctx.restore();
+
+    // Tick marks and labels — time axis
+    ctx.fillStyle = "#333333";
+    ctx.font = "9px Verdana, Geneva, sans-serif";
+    for (var ti = 0; ti <= nGridX; ti++) {
+        var tTick = ti / nGridX * tMax;
+        var txPx = tToCanvas(tTick);
+        ctx.strokeStyle = "#000000";
+        ctx.lineWidth = 1;
+        ctx.setLineDash([]);
+        ctx.beginPath(); ctx.moveTo(txPx, cy0 - 3); ctx.lineTo(txPx, cy0 + 3); ctx.stroke();
+        ctx.fillStyle = "#333333";
+        ctx.textAlign = "center";
+        ctx.fillText(sigFig(tTick, 3), txPx, cy0 + 13);
+    }
+
+    // Tick marks and labels — x(t) axis
+    var nYTicks = 4;
+    for (var yi = -nYTicks; yi <= nYTicks; yi++) {
+        var xTick = yi / nYTicks * yRange;
+        var yxPx = xToCanvas(xTick);
+        if (yxPx < MT || yxPx > MT + plotH) continue;
+        ctx.strokeStyle = "#000000";
+        ctx.lineWidth = 1;
+        ctx.setLineDash([]);
+        ctx.beginPath(); ctx.moveTo(ML - 3, yxPx); ctx.lineTo(ML + 3, yxPx); ctx.stroke();
+        ctx.fillStyle = "#333333";
+        ctx.textAlign = "right";
+        ctx.fillText(sigFig(xTick, 2), ML - 5, yxPx + 3);
+    }
+
+    // Draw time constant τ dashed vertical line (if finite and within range)
+    if (isFinite(p.tau) && p.tau > 0 && p.tau < tMax) {
+        var tauX = tToCanvas(p.tau);
+        ctx.strokeStyle = "#008800";
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 3]);
+        ctx.beginPath();
+        ctx.moveTo(tauX, MT);
+        ctx.lineTo(tauX, MT + plotH);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = "#008800";
+        ctx.font = "bold 9px Tahoma, Arial, sans-serif";
+        ctx.textAlign = "left";
+        var tauLabelX = tauX + 3;
+        if (tauLabelX + 30 > ML + plotW) tauLabelX = tauX - 34;
+        ctx.fillText("τ", tauLabelX, MT + 10);
+        ctx.font = "8px Verdana, Geneva, sans-serif";
+        ctx.fillText("=" + sigFig(p.tau, 3) + "s", tauLabelX, MT + 20);
+    }
+
+    // Draw decaying envelope for underdamped case
+    if (p.regime === "under") {
+        ctx.strokeStyle = "#CC6600";
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 3]);
+
+        // Positive envelope
+        ctx.beginPath();
+        for (var ei = 0; ei <= N; ei++) {
+            var et = ei / N * tMax;
+            var env = envelope(et, p);
+            var ex = tToCanvas(et);
+            var ey = xToCanvas(env);
+            if (ei === 0) ctx.moveTo(ex, ey);
+            else ctx.lineTo(ex, ey);
+        }
+        ctx.stroke();
+
+        // Negative envelope
+        ctx.beginPath();
+        for (var ei2 = 0; ei2 <= N; ei2++) {
+            var et2 = ei2 / N * tMax;
+            var env2 = -envelope(et2, p);
+            var ex2 = tToCanvas(et2);
+            var ey2 = xToCanvas(env2);
+            if (ei2 === 0) ctx.moveTo(ex2, ey2);
+            else ctx.lineTo(ex2, ey2);
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Label envelope
+        ctx.fillStyle = "#CC6600";
+        ctx.font = "bold 9px Tahoma, Arial, sans-serif";
+        ctx.textAlign = "left";
+        var envLabelT = tMax * 0.05;
+        var envLabelY = xToCanvas(envelope(envLabelT, p)) - 4;
+        if (envLabelY > MT + 4) {
+            ctx.fillText("±A(t)", tToCanvas(envLabelT), envLabelY);
+        }
+    }
+
+    // Draw the impulse response curve
+    ctx.strokeStyle = "#0000CC";
+    ctx.lineWidth = 2;
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    var started = false;
+    for (var si = 0; si <= N; si++) {
+        var sx = tToCanvas(tArr[si]);
+        var sy = xToCanvas(xArr[si]);
+        // Clip to plot area
+        if (sx < ML || sx > ML + plotW) continue;
+        var syC = Math.max(MT, Math.min(MT + plotH, sy));
+        if (!started) {
+            ctx.moveTo(sx, syC);
+            started = true;
+        } else {
+            ctx.lineTo(sx, syC);
+        }
+    }
+    ctx.stroke();
+}
+
+// ================================================================
+// SPECIFIC TRANSFER FUNCTION HTML RENDER
+// ================================================================
+
+function buildSpecificTFHTML(p) {
+    var m = p.m, c = p.c, k = p.k, wn = p.wn, zeta = p.zeta;
+
+    // Physical form: X(s)/F(s) = 1 / (ms² + cs + k)
+    var mStr   = fmtCoeff(m, 3);
+    var cStr   = fmtCoeff(c, 3);
+    var kStr   = fmtCoeff(k, 3);
+
+    // Standard form: X(s)/F(s) = (1/m) / (s² + 2ζωn s + ωn²)
+    var invM   = 1.0 / m;
+    var twoZwn = 2.0 * zeta * wn;
+    var wn2    = wn * wn;
+
+    var invMStr   = fmtCoeff(invM, 3);
+    var twoZwnStr = fmtCoeff(twoZwn, 3);
+    var wn2Str    = fmtCoeff(wn2, 3);
+
+    // Build denominator strings
+    var physDenom  = mStr + "s² + " + cStr + "s + " + kStr;
+    var stdDenom   = "s² + " + twoZwnStr + "s + " + wn2Str;
+
+    var html = "";
+
+    // Physical form
+    html += '<div style="margin-bottom:10px;">';
+    html += '<span style="font-family:Tahoma,Arial,sans-serif; font-size:11px; font-weight:bold; color:#000080;">Physical Form:</span><br>';
+    html += '<div style="margin-top:4px;">';
+    html += '<span class="tf-label">X(s)&nbsp;/&nbsp;F(s)&nbsp;=&nbsp;</span>';
+    html += '<span class="fraction">';
+    html += '<span class="numerator">&nbsp;&nbsp;1&nbsp;&nbsp;</span>';
+    html += '<span class="fraction-line"><span>' + repeatChar('&nbsp;', Math.max(physDenom.length + 4, 10)) + '</span></span>';
+    html += '<span class="denominator">' + escapeForHTML(physDenom) + '</span>';
+    html += '</span>';
+    html += '</div>';
+    html += '</div>';
+
+    // Standard form
+    html += '<div>';
+    html += '<span style="font-family:Tahoma,Arial,sans-serif; font-size:11px; font-weight:bold; color:#000080;">Standard Form:</span><br>';
+    html += '<div style="margin-top:4px;">';
+    html += '<span class="tf-label">X(s)&nbsp;/&nbsp;F(s)&nbsp;=&nbsp;</span>';
+    html += '<span class="fraction">';
+    html += '<span class="numerator">&nbsp;&nbsp;' + escapeForHTML(invMStr) + '&nbsp;&nbsp;</span>';
+    html += '<span class="fraction-line"><span>' + repeatChar('&nbsp;', Math.max(stdDenom.length + 4, 10)) + '</span></span>';
+    html += '<span class="denominator">' + escapeForHTML(stdDenom) + '</span>';
+    html += '</span>';
+    html += '</div>';
+    html += '</div>';
+
+    return html;
+}
+
+function repeatChar(ch, n) {
+    var s = "";
+    for (var i = 0; i < n; i++) s += ch;
+    return s;
+}
+
+function escapeForHTML(str) {
+    return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/²/g, "&sup2;")
+        .replace(/±/g, "&plusmn;");
+}
+
+// ================================================================
+// UPDATE UI — called on every slider change
+// ================================================================
+
+function updateAll() {
+    var m = parseFloat(document.getElementById("slider-m").value);
+    var c = parseFloat(document.getElementById("slider-c").value);
+    var k = parseFloat(document.getElementById("slider-k").value);
+
+    // Clamp to valid ranges
+    if (m < 0.1) m = 0.1;
+    if (c < 0)   c = 0;
+    if (k < 1)   k = 1;
+
+    var p = computeParams(m, c, k);
+
+    // Slider value readouts
+    document.getElementById("val-m").textContent = m.toFixed(1);
+    document.getElementById("val-c").textContent = c.toFixed(1);
+    document.getElementById("val-k").textContent = k.toFixed(1);
+
+    // Derived parameters
+    document.getElementById("val-wn").textContent   = sigFig(p.wn, 4);
+    document.getElementById("val-zeta").textContent = sigFig(p.zeta, 4);
+    document.getElementById("val-tau").textContent  = isFinite(p.tau) ? sigFig(p.tau, 4) : "∞";
+    document.getElementById("val-wd").textContent   = (p.regime === "under") ? sigFig(p.wd, 4) : "N/A";
+
+    // Damping regime tag
+    var tag = document.getElementById("damping-tag");
+    if (p.regime === "under") {
+        tag.textContent = "Underdamped (ζ = " + sigFig(p.zeta, 4) + " < 1)";
+        tag.style.backgroundColor = "#CC0000";
+        tag.style.color = "#FFFFFF";
+    } else if (p.regime === "critical") {
+        tag.textContent = "Critically Damped (ζ ≈ 1)";
+        tag.style.backgroundColor = "#E68A00";
+        tag.style.color = "#FFFFFF";
+    } else {
+        tag.textContent = "Overdamped (ζ = " + sigFig(p.zeta, 4) + " > 1)";
+        tag.style.backgroundColor = "#003399";
+        tag.style.color = "#FFFFFF";
+    }
+
+    // Specific TF
+    var tfEl = document.getElementById("specific-tf-output");
+    if (tfEl) tfEl.innerHTML = buildSpecificTFHTML(p);
+
+    // Canvases
+    var canvasPZ = document.getElementById("canvas-pz");
+    var canvasIR = document.getElementById("canvas-ir");
+    if (canvasPZ) drawPoleZeroMap(canvasPZ, p);
+    if (canvasIR) drawImpulseResponse(canvasIR, p);
+}
+
+// ================================================================
+// HIT COUNTER ANIMATION (cosmetic)
+// ================================================================
+
+function animateHitCounter() {
+    var el = document.getElementById("hit-counter");
+    if (!el) return;
+    var base = 4217;
+    var count = base + Math.floor(Math.random() * 3);
+    el.textContent = String(count).padStart(6, "0");
+}
+
+// ================================================================
+// EVENT LISTENERS & INIT
+// ================================================================
+
+(function init() {
+    var sliders = ["slider-m", "slider-c", "slider-k"];
+    for (var si = 0; si < sliders.length; si++) {
+        (function(id) {
+            var el = document.getElementById(id);
+            if (el) {
+                el.addEventListener("input", updateAll);
+                el.addEventListener("change", updateAll);
+            }
+        })(sliders[si]);
+    }
+
+    // Initial render
+    updateAll();
+    animateHitCounter();
+})();
+</script>
+
+</body>
+</html>
